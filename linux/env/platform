@@ -1,0 +1,46 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+#
+# 用于获取平台的脚本
+#
+
+import platform
+from optparse import OptionParser
+
+# 初始化输入选项
+parser = OptionParser()
+parser.add_option("-t", "--type", dest="type",
+                  help="show the platform variable TYPE", metavar="TYPE")
+(options, args) = parser.parse_args()
+
+# 匹配用户输入的类型，打印相关平台参数
+if options.type == "machine":
+    print platform.machine() # i386 i686 armv7l x86_64
+elif options.type == "system":
+    print platform.system() # Windows Linux
+elif options.type == "processor":
+    print platform.processor()
+elif options.type == "release":
+    print platform.release()
+elif options.type == "version":
+    print platform.version()
+elif options.type == "node":
+    print platform.node()
+elif options.type == "platform":
+    print platform.platform()
+else :
+    # 默认获取系统的位类型
+    machine = platform.machine()
+    if (machine.find("arm64") != -1):
+        print "arm64"
+    elif (machine.find("aarch64") != -1):
+        print "arm64"
+    elif (machine.find("arm") != -1):
+        print "armhf"
+    elif (machine == "i386") or (machine == "i686"):
+        print "i386"
+    elif (machine == "x86_64") or (machine == "amd64"):
+        print "amd64"
+
+exit(0)
